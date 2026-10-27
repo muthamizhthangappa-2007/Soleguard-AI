@@ -1,0 +1,13 @@
+timestamp,foot_region,pressure_kpa,data_type,note
+2026-10-27T09:00:00,heel,18.2,synthetic_demo,Illustrative value only
+2026-10-27T09:00:00,midfoot,12.6,synthetic_demo,Illustrative value only
+2026-10-27T09:00:00,forefoot,24.8,synthetic_demo,Illustrative value only
+2026-10-27T09:00:00,great_toe,20.1,synthetic_demo,Illustrative value only
+2026-10-27T09:05:00,heel,19.0,synthetic_demo,Illustrative value only
+2026-10-27T09:05:00,midfoot,13.1,synthetic_demo,Illustrative value only
+2026-10-27T09:05:00,forefoot,27.4,synthetic_demo,Illustrative value only
+2026-10-27T09:05:00,great_toe,21.5,synthetic_demo,Illustrative value only
+2026-10-27T09:10:00,heel,17.7,synthetic_demo,Illustrative value only
+2026-10-27T09:10:00,midfoot,12.2,synthetic_demo,Illustrative value only
+2026-10-27T09:10:00,forefoot,23.9,synthetic_demo,Illustrative value only
+2026-10-27T09:10:00,great_toe,19.4,synthetic_demo,Illustrative value only
