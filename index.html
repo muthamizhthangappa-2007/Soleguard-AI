@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="SoleGuard-AI foot-pressure monitoring prototype dashboard." />
+  <title>SoleGuard-AI | Smart Foot Pressure Monitoring</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="#" aria-label="SoleGuard AI home">
+        <span class="brand-mark">S<span>+</span></span>
+        <span><strong>SoleGuard<span class="brand-ai">-AI</span></strong><small>SMART FOOTCARE</small></span>
+      </a>
+
+      <div class="sidebar-label">WORKSPACE</div>
+      <nav class="nav-list" aria-label="Main navigation">
+        <a class="nav-link active" href="#overview"><span class="nav-icon">◫</span> Overview</a>
+        <a class="nav-link" href="#pressure"><span class="nav-icon">◉</span> Pressure map</a>
+        <a class="nav-link" href="#alerts"><span class="nav-icon">♧</span> Alerts <span class="nav-count" id="navAlertCount">0</span></a>
+        <a class="nav-link" href="#how-it-works"><span class="nav-icon">⌘</span> How it works</a>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <div class="prototype-card">
+          <span class="pulse-dot"></span>
+          <div><strong>Prototype mode</strong><small>Using simulated data</small></div>
+        </div>
+        <p class="sidebar-footnote">Built for awareness and research. Not a medical device.</p>
+      </div>
+    </aside>
+
+    <main class="main-content" id="overview">
+      <header class="topbar">
+        <button class="menu-button" id="menuButton" aria-label="Toggle navigation">☰</button>
+        <div>
+          <p class="eyebrow">HEALTH TECHNOLOGY / PROTOTYPE</p>
+          <h1>Foot pressure dashboard</h1>
+        </div>
+        <div class="topbar-actions">
+          <span class="status-pill"><span class="status-dot"></span><span id="connectionText">Demo connected</span></span>
+          <button class="avatar" title="Demo profile" aria-label="Demo profile">SG</button>
+        </div>
+      </header>
+
+      <section class="welcome-row">
+        <div>
+          <h2>Good day <span class="wave">✦</span></h2>
+          <p>Monitor pressure patterns, review alerts, and explore the SoleGuard-AI workflow.</p>
+        </div>
+        <div class="demo-controls">
+          <button class="button button-secondary" id="resetButton">Reset demo</button>
+          <button class="button button-primary" id="simulateButton"><span class="button-play">▶</span> Simulate reading</button>
+        </div>
+      </section>
+
+      <section class="metrics-grid" aria-label="Dashboard summary">
+        <article class="metric-card">
+          <div class="metric-top"><span class="metric-label">Current pressure index</span><span class="metric-icon blue">◉</span></div>
+          <div class="metric-value"><span id="pressureIndex">42</span><small>/ 100</small></div>
+          <div class="metric-foot"><span class="mini-indicator blue-indicator"></span><span id="pressureStatus">Within demo range</span></div>
+        </article>
+        <article class="metric-card">
+          <div class="metric-top"><span class="metric-label">High-pressure zones</span><span class="metric-icon orange">⌁</span></div>
+          <div class="metric-value"><span id="highZones">1</span><small> zones</small></div>
+          <div class="metric-foot"><span class="mini-indicator orange-indicator"></span>Based on demo threshold</div>
+        </article>
+        <article class="metric-card">
+          <div class="metric-top"><span class="metric-label">Alerts this session</span><span class="metric-icon purple">♧</span></div>
+          <div class="metric-value"><span id="alertTotal">0</span><small> alerts</small></div>
+          <div class="metric-foot"><span class="mini-indicator purple-indicator"></span>Review before taking action</div>
+        </article>
+        <article class="metric-card">
+          <div class="metric-top"><span class="metric-label">Last sample</span><span class="metric-icon green">◷</span></div>
+          <div class="metric-value time-value" id="lastSample">Now</div>
+          <div class="metric-foot"><span class="mini-indicator green-indicator"></span><span id="sampleMode">Simulated sensor sample</span></div>
+        </article>
+      </section>
+
+      <section class="dashboard-grid">
+        <article class="panel pressure-panel" id="pressure">
+          <div class="panel-heading">
+            <div><p class="eyebrow">SENSOR VISUALIZATION</p><h3>Plantar pressure map</h3><p class="panel-subtitle">Illustrative pressure distribution across foot regions</p></div>
+            <span class="live-badge"><span class="status-dot"></span> DEMO LIVE</span>
+          </div>
+          <div class="heatmap-layout">
+            <div class="foot-column">
+              <div class="foot-label"><span class="foot-dot left-dot"></span> LEFT FOOT</div>
+              <div class="foot-visual" id="leftFoot" aria-label="Illustrative left foot pressure heatmap">
+                <div class="toe toe-1"></div><div class="toe toe-2"></div><div class="toe toe-3"></div><div class="toe toe-4"></div><div class="toe toe-5"></div>
+                <div class="foot-body"></div>
+                <span class="hotspot spot-heel" data-zone="Left heel"></span>
+                <span class="hotspot spot-mid" data-zone="Left midfoot"></span>
+                <span class="hotspot spot-ball" data-zone="Left forefoot"></span>
+                <span class="hotspot spot-toe" data-zone="Left toes"></span>
+              </div>
+              <div class="foot-reading"><span>Peak zone</span><strong id="leftPeak">Forefoot · 68</strong></div>
+            </div>
+            <div class="foot-column">
+              <div class="foot-label"><span class="foot-dot right-dot"></span> RIGHT FOOT</div>
+              <div class="foot-visual right-foot" id="rightFoot" aria-label="Illustrative right foot pressure heatmap">
+                <div class="toe toe-1"></div><div class="toe toe-2"></div><div class="toe toe-3"></div><div class="toe toe-4"></div><div class="toe toe-5"></div>
+                <div class="foot-body"></div>
+                <span class="hotspot spot-heel" data-zone="Right heel"></span>
+                <span class="hotspot spot-mid" data-zone="Right midfoot"></span>
+                <span class="hotspot spot-ball" data-zone="Right forefoot"></span>
+                <span class="hotspot spot-toe" data-zone="Right toes"></span>
+              </div>
+              <div class="foot-reading"><span>Peak zone</span><strong id="rightPeak">Heel · 52</strong></div>
+            </div>
+          </div>
+          <div class="legend">
+            <span>Lower</span><div class="legend-bar"></div><span>Higher</span>
+            <span class="legend-note"><i class="legend-dot low"></i> Low <i class="legend-dot medium"></i> Moderate <i class="legend-dot high"></i> Elevated</span>
+          </div>
+          <p class="disclaimer-line">Illustrative visualization only. Values are not calibrated pressure measurements.</p>
+        </article>
+
+        <article class="panel analysis-panel">
+          <div class="panel-heading">
+            <div><p class="eyebrow">PATTERN REVIEW</p><h3>Pressure pattern insights</h3><p class="panel-subtitle">Rule-based demo analysis</p></div>
+            <span class="spark-icon">✧</span>
+          </div>
+          <div class="risk-meter-wrap">
+            <div class="risk-meter" id="riskMeter"><div class="risk-meter-inner"><strong id="riskScore">Low</strong><span>demo flag</span></div></div>
+            <div class="risk-copy"><span class="risk-tag" id="riskTag">LOW CONCERN</span><h4 id="riskHeadline">No sustained hotspot flagged</h4><p id="riskDescription">Current simulated readings are below the demo alert threshold.</p></div>
+          </div>
+          <div class="analysis-divider"></div>
+          <h4 class="small-heading">Zones to review</h4>
+          <div class="zone-list" id="zoneList">
+            <div class="zone-row"><span class="zone-marker moderate"></span><span class="zone-name">Left forefoot</span><strong>68</strong><span class="zone-status">Moderate</span></div>
+            <div class="zone-row"><span class="zone-marker low"></span><span class="zone-name">Right heel</span><strong>52</strong><span class="zone-status">Low</span></div>
+          </div>
+          <div class="analysis-note"><span>ⓘ</span><p>This is a demonstration rule, not a validated ulcer-risk prediction. Persistent changes should be assessed by a qualified healthcare professional.</p></div>
+        </article>
+      </section>
+
+      <section class="lower-grid">
+        <article class="panel trend-panel">
+          <div class="panel-heading">
+            <div><p class="eyebrow">RECENT SAMPLES</p><h3>Pressure trend</h3><p class="panel-subtitle">Illustrative index across the latest samples</p></div>
+            <span class="trend-range">LAST 8 SAMPLES</span>
+          </div>
+          <div class="chart-wrap">
+            <div class="chart-y-labels"><span>100</span><span>75</span><span>50</span><span>25</span><span>0</span></div>
+            <div class="chart-area">
+              <div class="chart-grid-lines"><i></i><i></i><i></i><i></i><i></i></div>
+              <svg id="trendChart" viewBox="0 0 600 180" preserveAspectRatio="none" role="img" aria-label="Pressure index trend chart">
+                <defs><linearGradient id="areaFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#3b82f6" stop-opacity=".25"/><stop offset="100%" stop-color="#3b82f6" stop-opacity="0"/></linearGradient></defs>
+                <path id="chartArea" d="" fill="url(#areaFill)"></path>
+                <polyline id="chartLine" points="" fill="none" stroke="#3979e8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></polyline>
+                <g id="chartPoints"></g>
+              </svg>
+              <div class="chart-x-labels" id="chartLabels"><span>Sample 1</span><span>Sample 2</span><span>Sample 3</span><span>Sample 4</span><span>Sample 5</span><span>Sample 6</span><span>Sample 7</span><span>Now</span></div>
+            </div>
+          </div>
+          <div class="chart-footer"><span><i class="chart-legend-dot"></i> Combined pressure index</span><span id="trendSummary">Stable across recent samples</span></div>
+        </article>
+
+        <article class="panel response-panel">
+          <div class="panel-heading">
+            <div><p class="eyebrow">CLOSED-LOOP CONCEPT</p><h3>Detect → Respond → Verify</h3><p class="panel-subtitle">Simulate a pressure response</p></div>
+            <span class="loop-icon">↻</span>
+          </div>
+          <div class="workflow">
+            <div class="workflow-step done"><span class="step-number">1</span><div><strong>Detect</strong><small>Read sensor values</small></div><span class="step-check">✓</span></div>
+            <div class="workflow-connector"></div>
+            <div class="workflow-step" id="respondStep"><span class="step-number">2</span><div><strong>Respond</strong><small>Show a reminder to review loading</small></div><span class="step-state">Ready</span></div>
+            <div class="workflow-connector"></div>
+            <div class="workflow-step" id="verifyStep"><span class="step-number">3</span><div><strong>Verify</strong><small>Compare the next sample</small></div><span class="step-state">Pending</span></div>
+          </div>
+          <div class="response-result" id="responseResult"><span class="result-icon">↗</span><div><strong>Ready to run demo</strong><p>Generate a reading, then simulate a response to compare sample values.</p></div></div>
+          <button class="button button-primary full-width" id="responseButton">Simulate response & verify</button>
+          <p class="tiny-note">No physical offloading occurs. This button changes simulated values only.</p>
+        </article>
+      </section>
+
+      <section class="panel alerts-panel" id="alerts">
+        <div class="panel-heading">
+          <div><p class="eyebrow">SESSION HISTORY</p><h3>Alerts & activity</h3><p class="panel-subtitle">Events generated by the demo rules</p></div>
+          <button class="text-button" id="clearAlerts">Clear history</button>
+        </div>
+        <div class="activity-list" id="activityList">
+          <div class="empty-state"><span class="empty-icon">✓</span><strong>No alerts yet</strong><p>Simulate a reading to generate activity.</p></div>
+        </div>
+      </section>
+
+      <section class="how-section" id="how-it-works">
+        <div class="how-heading"><p class="eyebrow">THE CONCEPT</p><h2>From invisible pressure to useful feedback.</h2><p>SoleGuard-AI is a student prototype concept for exploring pressure monitoring and user feedback.</p></div>
+        <div class="how-cards">
+          <article><span class="how-number">01</span><div class="how-icon">⌁</div><h3>Sense</h3><p>Collect readings from selected regions of a sensor-equipped insole.</p></article>
+          <article><span class="how-number">02</span><div class="how-icon">✧</div><h3>Interpret</h3><p>Review readings against transparent demo thresholds and recent patterns.</p></article>
+          <article><span class="how-number">03</span><div class="how-icon">↻</div><h3>Verify</h3><p>Compare readings after a simulated response to see whether the index changed.</p></article>
+        </div>
+      </section>
+
+      <footer class="footer"><span>© 2026 SoleGuard-AI · Hackathon prototype</span><span>Educational demo only · Not for medical decisions</span></footer>
+    </main>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>
